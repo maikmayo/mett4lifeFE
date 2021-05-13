@@ -1,0 +1,15 @@
+<div class="menubarWrapper">
+  <p-menubar [model]="items" styleClass="menubar">
+    <ng-template pTemplate="start">
+      <!-- <img src="assets/images/MettLogo.png" height="40" class="p-mr-2" /> -->
+      <div class="logo" (click)="switchToMainRoute()">
+        <h3 style="letter-spacing: 2px">Mett</h3>
+        <h3>4</h3>
+        <h3 style="letter-spacing: 6px; padding-left: 4px">Life</h3>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <p-button label="anmelden" icon="pi pi-user"></p-button>
+    </ng-template>
+  </p-menubar>
+</div>

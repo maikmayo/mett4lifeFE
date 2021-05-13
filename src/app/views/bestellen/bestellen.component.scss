@@ -1,0 +1,85 @@
+.tableWrapper {
+  padding: 3rem 3rem;
+}
+
+// Sticky Table
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  position: sticky;
+  top: -1px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-wrapper {
+  overflow-x: initial;
+}
+
+// Responsive Table
+:host ::ng-deep {
+  .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 43rem) {
+  :host ::ng-deep {
+    .p-datatable {
+      &.p-datatable-responsive-demo {
+        .p-datatable-thead > tr > th,
+        .p-datatable-tfoot > tr > td {
+          display: none !important;
+        }
+
+        .p-datatable-tbody > tr > td {
+          text-align: left;
+          display: block;
+          width: 100%;
+          float: left;
+          clear: left;
+          border: 0 none;
+
+          .p-column-title {
+            padding: 0.4rem;
+            min-width: 30%;
+            display: inline-block;
+            margin: -0.4em 1em -0.4em -0.4rem;
+            font-weight: bold;
+          }
+
+          &:last-child {
+            border-bottom: 1px solid var(--surface-d);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Bestellung Modal
+:host ::ng-deep .p-dialog .p-button-text .p-button {
+  margin: 0 0.5rem 0 0;
+  min-width: 10rem;
+}
+
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button-text .p-button {
+  min-width: 6rem;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .checkboxLabel {
+    padding-left: 7px;
+  }
+}

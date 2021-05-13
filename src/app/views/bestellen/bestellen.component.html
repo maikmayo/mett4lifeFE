@@ -1,0 +1,112 @@
+<!-- Tabelle -->
+<div class="tableWrapper">
+  <p-table
+    [value]="bestellungenProPerson"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm p-datatable-responsive-demo"
+  >
+    <!-- Header -->
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <p>Bestellungen</p>
+        <p-button icon="pi pi-refresh"></p-button>
+      </div>
+    </ng-template>
+
+    <!-- Headings -->
+    <ng-template pTemplate="header">
+      <tr>
+        <!-- Kürzel -->
+        <th pResizableColumn pSortableColumn="kuerzel">
+          Kürzel<p-sortIcon field="kuerzel"></p-sortIcon>
+        </th>
+        <!-- Datum -->
+        <th pResizableColumn *ngFor="let col of tableDateCols">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Body -->
+    <ng-template pTemplate="body" let-bestellung>
+      <tr>
+        <!-- Kürzel -->
+        <td>
+          <span class="p-column-title">{{ "Kürzel" }}</span
+          ><b>{{ bestellung.kuerzel | uppercase }}</b>
+        </td>
+        <!-- Datums-Felder -->
+        <td
+          *ngFor="let detail of bestellung.bestellungen"
+          (click)="tableClick(bestellung.personID, detail)"
+        >
+          <span class="p-column-title">{{ formatDate(detail.datum) }}</span>
+          {{ detail.ohneMett ? "(" + detail.anzahl + ")" : detail.anzahl }}
+          <i class="pi" [class]="detail.bezahlt ? 'pi-check' : 'pi-times'"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Bestellung ändern Dialog -->
+<p-dialog
+  [header]="'Bestellung bearbeiten - ' + formatDate(dialogDetail.datum)"
+  [(visible)]="displayBestellungBearbeiten"
+  [style]="{ width: '500px' }"
+  [baseZIndex]="10000"
+  [modal]="true"
+  [resizable]="false"
+>
+  <div class="dialogContent">
+    <p-inputNumber
+      [(ngModel)]="dialogDetail.anzahl"
+      [showButtons]="true"
+      buttonLayout="horizontal"
+      spinnerMode="horizontal"
+      decrementButtonClass="p-button-danger"
+      incrementButtonClass="p-button-success"
+      incrementButtonIcon="pi pi-plus"
+      decrementButtonIcon="pi pi-minus"
+      [min]="0"
+      [max]="7"
+      [size]="1"
+      prefix="# "
+    >
+    </p-inputNumber>
+    <div>
+      <p-checkbox
+        value="val1"
+        [(ngModel)]="dialogDetail.bezahlt"
+        inputId="isBezahlt"
+        [binary]="true"
+      ></p-checkbox>
+      <label for="isBezahlt" class="checkboxLabel">Bezahlt</label>
+    </div>
+    <div>
+      <p-checkbox
+        value="val2"
+        [(ngModel)]="dialogDetail.ohneMett"
+        inputId="isOhneMett"
+        [binary]="true"
+      ></p-checkbox>
+      <label for="isOhneMett" class="checkboxLabel">Nur das Brötchen</label>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-trash"
+      (click)="dialogFooterClicked(false)"
+      label="Abbrechen"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="dialogFooterClicked(true)"
+      label="Speichern"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>

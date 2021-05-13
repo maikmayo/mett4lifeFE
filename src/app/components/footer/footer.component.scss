@@ -1,0 +1,38 @@
+footer {
+  height: 3.5rem;
+  background-color: #333;
+  vertical-align: middle;
+
+  .footerWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .text {
+      color: #666;
+      display: flex;
+      align-items: center;
+
+      &.right {
+        padding-right: 1rem;
+      }
+
+      &.left {
+        padding-left: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 43rem) {
+  footer {
+    .footerWrapper {
+      .text {
+        &.right {
+          display: none;
+        }
+      }
+    }
+  }
+}

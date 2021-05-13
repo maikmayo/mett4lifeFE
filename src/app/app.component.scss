@@ -1,0 +1,9 @@
+.pageWrapper {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+
+  .contentWrapper {
+    flex: 1;
+  }
+}
